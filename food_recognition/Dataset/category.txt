@@ -1,0 +1,4 @@
+1 rice
+2 roti
+3 dal
+4 sabzi
