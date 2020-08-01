@@ -22,4 +22,8 @@ and develop solutions to monitor the activities under the Mid-day Meal Scheme.
 
 ### File System
 
-To be updated soon
+- README.md 
+- face_recognition
+  - Faces
+  - Other code files
+- **to be continued**  
