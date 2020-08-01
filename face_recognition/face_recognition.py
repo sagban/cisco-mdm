@@ -18,7 +18,7 @@ class NumpyArrayEncoder(JSONEncoder):
         return JSONEncoder.default(self, obj)
 
 
-Encoding_dir = os.path.join(os.getcwd(), "..", "Faces/known_people")
+Encoding_dir = os.path.join(os.getcwd(), "Faces", "known_people")
 
 def scan_known_people(known_people_folder, isPresent):
     if isPresent == False:
@@ -141,7 +141,7 @@ def do_recognition(known_people_folder, images_to_check, isPresent=False, cpus=1
 
 
 def main():
-    BASE_DIR = os.path.join(os.getcwd(), "..", "Faces")
+    BASE_DIR = os.path.join(os.getcwd(), "Faces")
     known_people_folder = input("Enter the folder where known faces/encodings are present: ")
     images_to_check = input("Enter the image OR folder name where the images are place on which recognition is to be applied: ")
     isPresent = input("Are encodings already present? (Y/n): ")
