@@ -1,0 +1,19 @@
+<annotation verified="yes">
+  <folder>Dataset/1</folder>
+  <filename>10.jpg</filename>
+  <path>Dataset/1/10.jpg</path>
+  <size>
+    <width>224</width>
+    <height>224</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>rice</name>
+    <bndbox>
+      <xmin>81</xmin>
+      <ymin>103</ymin>
+      <xmax>112</xmax>
+      <ymax>178</ymax>
+    </bndbox>
+  </object>
+</annotation>

@@ -1,0 +1,19 @@
+<annotation verified="yes">
+  <folder>Dataset/4</folder>
+  <filename>523.jpg</filename>
+  <path>Dataset/4/523.jpg</path>
+  <size>
+    <width>224</width>
+    <height>224</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>sabzi</name>
+    <bndbox>
+      <xmin>36</xmin>
+      <ymin>20</ymin>
+      <xmax>190</xmax>
+      <ymax>209</ymax>
+    </bndbox>
+  </object>
+</annotation>

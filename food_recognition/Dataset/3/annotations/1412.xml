@@ -1,0 +1,19 @@
+<annotation verified="yes">
+  <folder>Dataset/3</folder>
+  <filename>1412.jpg</filename>
+  <path>Dataset/3/1412.jpg</path>
+  <size>
+    <width>224</width>
+    <height>224</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>dal</name>
+    <bndbox>
+      <xmin>45</xmin>
+      <ymin>145</ymin>
+      <xmax>116</xmax>
+      <ymax>216</ymax>
+    </bndbox>
+  </object>
+</annotation>

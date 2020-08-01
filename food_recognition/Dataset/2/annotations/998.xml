@@ -1,0 +1,19 @@
+<annotation verified="yes">
+  <folder>Dataset/2</folder>
+  <filename>998.jpg</filename>
+  <path>Dataset/2/998.jpg</path>
+  <size>
+    <width>224</width>
+    <height>224</height>
+    <depth>3</depth>
+  </size>
+  <object>
+    <name>roti</name>
+    <bndbox>
+      <xmin>23</xmin>
+      <ymin>23</ymin>
+      <xmax>224</xmax>
+      <ymax>224</ymax>
+    </bndbox>
+  </object>
+</annotation>
