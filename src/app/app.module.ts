@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { DashboardSchoolModule} from './dashboard-school/dashboard-school.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,10 +13,13 @@ import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ReportsComponent } from './reports/reports.component';
 import { LoginHomeComponent } from './login-home/login-home.component';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthenticationService} from './_services/authentication.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { AuthenticationService} from './_services/authentication.service';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { DashboardSchoolComponent } from './dashboard-school/dashboard-school.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { ReportCardComponent } from './report-card/report-card.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     SignupComponent,
     ForgotPasswordComponent,
     ReportsComponent,
-    LoginHomeComponent
+    LoginHomeComponent,
+    DashboardSchoolComponent,
+    DashboardAdminComponent,
+    ReportCardComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +43,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    DashboardSchoolModule,
     AppRoutingModule
   ],
   providers: [AuthenticationService],
