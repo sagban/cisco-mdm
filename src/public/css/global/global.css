@@ -1198,7 +1198,7 @@
   Border
 ------------------------------------*/
 .g-hor-border-1__solid--primary {
-  border: 0.0625rem solid #f97979;
+  border: 0.0625rem solid #337ab7;
 }
 
 .g-hor-border-4__solid--white {
@@ -7212,7 +7212,7 @@
 ------------------------------------*/
 /* Text Colors */
 .g-color--primary {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 .g-color--blueviolet {
@@ -7220,7 +7220,7 @@
 }
 
 .g-color--red {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 .g-color--gold {
@@ -7281,16 +7281,16 @@
 
 /* Hover Colors */
 .g-color--text[href]:hover {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 .g-color--white-opacity[href]:hover {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 /* Background Colors */
 .g-bg-color--primary {
-  background-color: #f97979 !important;
+  background-color: #337ab7 !important;
 }
 
 .g-bg-color--blueviolet {
@@ -7298,7 +7298,7 @@
 }
 
 .g-bg-color--red {
-  background-color: #f97979 !important;
+  background-color: #337ab7 !important;
 }
 
 .g-bg-color--gold {
@@ -7366,6 +7366,6 @@
 }
 
 .g-bg-color--primary-ltr {
-  background-image: linear-gradient(125deg, #8b1014 0%, #f97979 100%);
+  background-image: linear-gradient(125deg, #8b1014 0%, #337ab7 100%);
   background-repeat: repeat-x;
 }

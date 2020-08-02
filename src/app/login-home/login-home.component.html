@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="s-promo-block-v1 g-fullheight--md sell">
+    <div class="container g-ver-center--md g-padding-y-100--xs g-margin-t-30--xs">
+        <div class="row g-hor-centered-row--md g-margin-t-30--xs g-margin-t-20--sm">
+            <div class="col-lg-4 col-sm-4 g-hor-centered-row__col">
+              <div class="wow fadeInUp center-block g-width-350--xs g-bg-color--white g-box-shadow__dark-lightest-v1 g-padding-x-40--xs g-padding-y-60--xs g-radius--4" data-wow-duration=".3" data-wow-delay=".1s">
+                <app-signup *ngIf="!have_account && !forgot_password"></app-signup>
+                <app-login *ngIf="have_account && !forgot_password"></app-login>
+                <app-forgot-password *ngIf="forgot_password"></app-forgot-password>
+                <div class="g-text-center--xs">
+                  <div class="g-color--dark g-font-size-13--xs have_account" *ngIf="have_account" (click)="this.forgotPassword();">{{forgot_password_text}}</div>
+                  <div class="g-color--dark g-font-size-13--xs have_account" (click)="this.changeOption();">{{have_account_text}}</div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

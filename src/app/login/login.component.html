@@ -1,1 +1,41 @@
-<p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="signIn()">
+  <div class="g-text-center--xs g-margin-b-40--xs">
+      <h2 class="g-font-size-30--xs g-color--dark">Login</h2>
+  </div>
+  <div class="g-margin-b-30--xs">
+    <input type="email" class="form-control s-form-v4__input" formControlName="email" placeholder="* Email" required>
+    <div *ngIf="f.email?.invalid && (f.email?.dirty || f.email?.touched)">
+      <div *ngIf="f.email.errors?.required" class="g-color--primary g-font-size-10--xs">
+        Email is required.
+      </div>
+      <div *ngIf="f.email.errors?.email" class="g-color--primary g-font-size-10--xs">
+        Invalid email format.
+      </div>
+    </div>
+  </div>
+  <div class="g-margin-b-30--xs">
+    <select class="form-control s-form-v4__input"  formControlName="role" required>
+      <option value="#">Select Role</option>
+      <option [ngValue]="1">School Admin</option>
+      <option [ngValue]="2">MDM Admin</option>
+    </select>
+    <div *ngIf="f.role?.invalid && (f.role?.dirty || f.role?.touched)">
+      <div *ngIf="f.role.errors?.required" class="g-color--primary g-font-size-10--xs">
+        Role is required.
+      </div>
+    </div>
+  </div>
+  <div class="g-margin-b-30--xs">
+    <input type="password" class="form-control s-form-v4__input" formControlName="password" placeholder="* Password" required>
+    <div *ngIf="f.password?.invalid && (f.password?.dirty || f.password?.touched)">
+      <div *ngIf="f.email.errors?.required" class="g-color--primary g-font-size-10--xs">
+        Password is required.
+      </div>
+    </div>
+  </div>
+  <div class="g-text-center--xs">
+    <button type="submit" [disabled]="loginForm.invalid" class="text-uppercase btn-block s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs">Login</button>
+    <p class="g-font-size-13--xs g-color--primary" *ngIf="message != ''">{{message}}</p>
+  </div>
+
+</form>
