@@ -1,0 +1,7 @@
+Python 3.3+ or Python 2.7
+macOS or Linux
+dlib>=19.3.0
+numpy
+Pillow
+Click>=6.0
+scipy>=0.17.0
