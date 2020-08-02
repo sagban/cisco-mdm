@@ -1,0 +1,5 @@
+Python 3.3+ or Python 2.7
+macOS or Linux
+dlib>=19.3.0
+numpy
+Pillow
