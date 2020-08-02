@@ -10,6 +10,15 @@ import PIL.Image
 import numpy as np
 import json
 from json import JSONEncoder
+import cv2
+
+Encoding_dir = os.path.join(os.getcwd(), "..", "Faces/known_people")
+
+isPresent = True
+size = os.path.getsize(os.path.join(Encoding_dir, "enc1.json"))
+
+if size == 0:
+	isPresent=False
 
 class NumpyArrayEncoder(JSONEncoder):
     def default(self, obj):
@@ -17,8 +26,6 @@ class NumpyArrayEncoder(JSONEncoder):
             return obj.tolist()
         return JSONEncoder.default(self, obj)
 
-
-Encoding_dir = os.path.join(os.getcwd(), "Faces", "known_people")
 
 def scan_known_people(known_people_folder, isPresent):
     if isPresent == False:
@@ -68,27 +75,39 @@ def print_result(filename, name, distance, show_distance=False):
 
 
 def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.55, show_distance=False):
-    unknown_image = face_recognition.load_image_file(image_to_check)
+    unknown_image = image_to_check#face_recognition.load_image_file(image_to_check)
 
-    if max(unknown_image.shape) > 1600:
+    '''if max(unknown_image.shape) > 1600:
         pil_img = PIL.Image.fromarray(unknown_image)
         pil_img.thumbnail((1600, 1600), PIL.Image.LANCZOS)
-        unknown_image = np.array(pil_img)
+        unknown_image = np.array(pil_img)'''
 
     unknown_encodings = face_recognition.face_encodings(unknown_image)
-
+    values = {}
+    ctr = 0
     for unknown_encoding in unknown_encodings:
         distances = face_recognition.face_distance(known_face_encodings, unknown_encoding)
         result = list(distances <= tolerance)
 
         if True in result:
-            [print_result(image_to_check, name, distance, show_distance) for is_match, name, distance in zip(result, known_names, distances) if is_match]
+            #[print_result(image_to_check, name, distance, show_distance) for is_match, name, distance in zip(result, known_names, distances) if is_match]
+            for is_match, name, distance in zip(result, known_names, distances):
+            	if is_match:
+            		values[ctr] = name
+            		ctr = ctr + 1#list_of_people = list_of_people + " " +name
         else:
-            print_result(image_to_check, "unknown_person", None, show_distance)
+            values[ctr] = "unknown_person"
+            ctr=ctr+1
+            #list_of_people = list_of_people + " unknown_person"
+            #print_result(image_to_check, "unknown_person", None, show_distance)
 
     if not unknown_encodings:
-        print_result(image_to_check, "no_persons_found", None, show_distance)
-
+        values[ctr] = "no_person_found"
+        ctr=ctr+1
+        #list_of_people = list_of_people + " no person found"
+        #print_result(image_to_check, "no_persons_found", None, show_distance)
+    
+    return values
 
 def image_files_in_folder(folder):
     return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
@@ -116,7 +135,7 @@ def process_images_in_process_pool(images_to_check, known_names, known_face_enco
 
     pool.starmap(test_image, function_parameters)
 
-def do_recognition(known_people_folder, images_to_check, isPresent=False, cpus=1, tolerance=0.55, show_distance=False):
+def do_recognition(images_to_check, known_people_folder=Encoding_dir, isPresent=False, cpus=1, tolerance=0.55, show_distance=False):
     '''
     :param known_people_folder: (Required) Folder containing person's facial information. Either raw images, or precomputed encodings
     :param images_to_check: (Required) Path to image/directory of images to apply recognition alogrithm on.
@@ -131,31 +150,20 @@ def do_recognition(known_people_folder, images_to_check, isPresent=False, cpus=1
         print("WARNING: Python 3.4+ is needed for multi-processing. Doing on single CPU")
         cpus = 1
 
-    if os.path.isdir(images_to_check):
-        if cpus == 1:
-            [test_image(image_file, known_names, known_face_encodings, tolerance, show_distance) for image_file in image_files_in_folder(images_to_check)]
-        else:
-            process_images_in_process_pool(image_files_in_folder(images_to_check), known_names, known_face_encodings, cpus, tolerance, show_distance)
-    else:
-        test_image(images_to_check, known_names, known_face_encodings, tolerance, show_distance)
+    ret = test_image(images_to_check, known_names, known_face_encodings, tolerance, show_distance)
+    return ret
 
 
 def main():
-    BASE_DIR = os.path.join(os.getcwd(), "Faces")
-    known_people_folder = input("Enter the folder where known faces/encodings are present: ")
-    images_to_check = input("Enter the image OR folder name where the images are place on which recognition is to be applied: ")
-    isPresent = input("Are encodings already present? (Y/n): ")
-    if isPresent == 'Y' or isPresent == 'y':
-        isPresent = True
-    else:
-        isPresent = False
-    if isPresent:
-        enc_file_name = input("Enter the name of encodings file: ")
-        encodings_file = os.path.join(known_people_folder, enc_file_name)
+    BASE_DIR = os.path.join(os.getcwd(), "..", "Faces")
+    #known_people_folder = input("Enter the folder where known faces/encodings are present: ")
+    images_to_check = input("Enter the image on which recognition is to be applied: ")
 
-    known_people_folder = os.path.join(BASE_DIR, known_people_folder)
+    #known_people_folder = os.path.join(BASE_DIR, known_people_folder)
     images_to_check = os.path.join(BASE_DIR, images_to_check)
-    do_recognition(known_people_folder, images_to_check, isPresent=isPresent)        
+    image = cv2.imread(images_to_check)
+    result = do_recognition(image, isPresent=isPresent) 
+    print(result)       
 
 
 if __name__ == "__main__":
