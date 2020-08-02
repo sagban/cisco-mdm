@@ -236,7 +236,7 @@ def cnn_extension_RF(alexnet, isPresent=True, train_images=None, test_images=Non
             lines = f.readlines()
             for line in lines:
                 l = line.rstrip('\n')
-                train_labels.append(l)        
+                train_labels.append(float(l))        
         train_label_ids = [np.uint(tl) for tl in train_labels]
         features = np.load(os.path.join(BASE_PATH, 'features.npy'))       
         train_features=pd.DataFrame(data=features,columns=feature_col)
@@ -244,7 +244,7 @@ def cnn_extension_RF(alexnet, isPresent=True, train_images=None, test_images=Non
 
     """## Random Forest Classifier"""
 
-    rf = RandomForestClassifier(n_estimators = 20, random_state = 22, max_features=8)
+    rf = RandomForestClassifier(n_estimators = 12, random_state = 24, max_features=10)
 
     rf.fit(train_features, train_label_ids)
 
@@ -271,7 +271,7 @@ def cnn_extension_RF(alexnet, isPresent=True, train_images=None, test_images=Non
             lines = f.readlines()
             for line in lines:
                 l = line.rstrip('\n')
-                test_labels.append(l)
+                test_labels.append(float(l))
         test_label_ids = [np.uint(tl) for tl in test_labels]        
 
 
