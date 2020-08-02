@@ -18,7 +18,7 @@ class NumpyArrayEncoder(JSONEncoder):
         return JSONEncoder.default(self, obj)
 
 
-Encoding_dir = os.path.join(os.getcwd(), "Faces", "known_people")
+Encoding_dir = os.path.join(os.getcwd(), "Faces", "known_faces")
 
 def scan_known_people(known_people_folder, isPresent):
     if isPresent == False:
