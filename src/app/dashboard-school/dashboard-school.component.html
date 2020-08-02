@@ -1,0 +1,47 @@
+<app-header></app-header>
+<div class="d-container g-padding-y-80--xs g-padding-y-100--sm g-padding-x-20--xs g-padding-x-40--sm g-padding-x-80--md">
+  <div class="d-section g-margin-t-20">
+    <div class="left-section g-padding-y-20--xs">
+
+      <div (click)="toogleMenuList()" class="heading g-font-size-18--xs g-font-size-16--sm"><div>Menu</div><i class="material-icons">menu</i></div>
+
+      <section class="menu-list" *ngIf="menuListShown">
+        <div class="dashboard g-padding-y-10--xs">
+          <div class="g-font-size-14--xs g-font-weight--600 text-uppercase">Dashboard</div>
+          <ul class="list-unstyled">
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school">Home</a></li>
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
+        <div class="artist g-padding-y-10--xs">
+          <span class="g-font-size-14--xs g-font-weight--600 text-uppercase">Meraki Camera</span>
+          <ul class="list-unstyled">
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school/connect_camera">Connect Camera</a></li>
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school/food">Food Detection</a></li>
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school/face">Face Detection</a></li>
+          </ul>
+        </div>
+        <div class="sales  g-padding-y-10--xs">
+          <span class="g-font-size-14--xs g-font-weight--600 text-uppercase">Reports</span>
+          <ul class="list-unstyled">
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school/reports">View Reports</a></li>
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school/discrepancy">Discrepancy</a></li>
+          </ul>
+        </div>
+        <div class="help g-padding-y-10--xs">
+          <span class="g-font-size-14--xs g-font-weight--600 text-uppercase">Help & Support</span>
+          <ul class="list-unstyled">
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school/grievance">Apply for Grievance</a></li>
+            <li class="g-color--dark g-font-size-13--xs"><a class="g-font-size-13--xs" routerLink="/dashboard/school/guidelines">Guidelines</a></li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
+    <div class="right-section g-padding-y-20--xs">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

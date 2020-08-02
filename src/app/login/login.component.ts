@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard/school';
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       role: ['', [Validators.required]],
@@ -36,6 +36,12 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   signIn() {
+    localStorage.setItem('session', JSON.stringify(true));
+    this.authenticationService._getSession.next(true);
+    // localStorage.setItem('verifiedUserName', JSON.stringify(res.data['username']));
+    // // this.authenticationService._getVerifiedUserName.next( res.data['username']);
+    window.location.href = this.returnUrl;
+
     this.formService.login(this.loginForm.value).pipe(first()).subscribe(res =>{
       console.log(res);
       if(res.status == 0){
@@ -46,9 +52,9 @@ export class LoginComponent implements OnInit {
         this.loginForm.reset();
         localStorage.setItem('session', JSON.stringify(true));
         this.authenticationService._getSession.next(true);
-        localStorage.setItem('verifiedUserName', JSON.stringify(res.data['username']));
-        // this.authenticationService._getVerifiedUserName.next( res.data['username']);
-        // window.location.href = this.returnUrl;
+        // localStorage.setItem('verifiedUserName', JSON.stringify(res.data['username']));
+        // // this.authenticationService._getVerifiedUserName.next( res.data['username']);
+        window.location.href = this.returnUrl;
       }
       else{
         this.message = "Something went wrong";

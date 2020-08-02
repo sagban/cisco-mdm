@@ -1,0 +1,14 @@
+.price-star{
+  /*display: flex;*/
+  width: 100%;
+}
+.price-star .price{
+  margin-right: 20px;
+}
+.price-star .star{
+  /*display: flex;*/
+  align-items: center;
+}
+.price .strike{
+  /*text-decoration: line-through;*/
+}

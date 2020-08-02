@@ -49,7 +49,7 @@ Thumbs.db
 
 # Backend Ignores
 # Environments
-backend/venv
+mdm_backend/venv
 
 
 
