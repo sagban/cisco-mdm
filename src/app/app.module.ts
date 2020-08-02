@@ -11,6 +11,11 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ReportsComponent } from './reports/reports.component';
+import { LoginHomeComponent } from './login-home/login-home.component';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthenticationService} from './_services/authentication.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,13 +27,18 @@ import { ReportsComponent } from './reports/reports.component';
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    ReportsComponent
+    ReportsComponent,
+    LoginHomeComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

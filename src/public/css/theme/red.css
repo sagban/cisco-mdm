@@ -13,17 +13,17 @@ h5 a:focus,
 h5 a:hover,
 h6 a:focus,
 h6 a:hover {
-  color: #f97979;
+  color: #337ab7;
 }
 
 em > a:hover,
 li > a:hover {
-  color: #f97979;
+  color: #337ab7;
 }
 
 /* Links */
 a {
-  color: #f97979;
+  color: #337ab7;
 }
 
 a:focus, a:hover {
@@ -35,13 +35,13 @@ a:focus, a:hover {
 ------------------------------------*/
 ::selection {
   color: #fff;
-  background: #f97979;
+  background: #337ab7;
   text-shadow: none;
 }
 
 ::-webkit-selection {
   color: #fff;
-  background: #f97979;
+  background: #337ab7;
   text-shadow: none;
 }
 
@@ -59,7 +59,7 @@ a:focus, a:hover {
 }
 
 .s-btn--white-bg:focus, .s-btn--white-bg:hover {
-  color: #f97979;
+  color: #337ab7;
   background: #fff;
 }
 
@@ -73,36 +73,36 @@ a:focus, a:hover {
 
 .s-btn--dark-bg:focus, .s-btn--dark-bg:hover {
   color: #fff;
-  background: #f97979;
-  border-color: #f97979;
+  background: #337ab7;
+  border-color: #337ab7;
 }
 
 .s-btn--primary-bg {
   color: #fff;
-  background: #f97979;
+  background: #337ab7;
   border-width: 0.0625rem;
   border-style: solid;
-  border-color: #f97979;
+  border-color: #337ab7;
 }
 
 .s-btn--primary-bg:focus, .s-btn--primary-bg:hover {
   color: #fff;
-  background: #f97979;
-  border-color: #f97979;
+  background: #337ab7;
+  border-color: #337ab7;
 }
 
 .s-btn--primary-brd {
-  color: #f97979;
+  color: #337ab7;
   background: transparent;
   border-width: 0.0625rem;
   border-style: solid;
-  border-color: #f97979;
+  border-color: #337ab7;
 }
 
 .s-btn--primary-brd:focus, .s-btn--primary-brd:hover {
   color: #fff;
-  background: #f97979;
-  border-color: #f97979;
+  background: #337ab7;
+  border-color: #337ab7;
 }
 
 /*----------------------------------
@@ -119,8 +119,8 @@ a:focus, a:hover {
 
 .s-icon--white-brd:focus, .s-icon--white-brd:hover {
   color: #fff;
-  background: #f97979;
-  border-color: #f97979;
+  background: #337ab7;
+  border-color: #337ab7;
 }
 
 .s-icon--white-bg {
@@ -133,29 +133,29 @@ a:focus, a:hover {
 }
 
 .s-icon--white-bg:focus, .s-icon--white-bg:hover {
-  color: #f97979;
+  color: #337ab7;
   background: #fff;
   border-color: #fff;
 }
 
 .s-icon--primary-brd {
-  color: #f97979;
+  color: #337ab7;
   background: transparent;
   border-width: 0.0625rem;
   border-style: solid;
-  border-color: #f97979;
+  border-color: #337ab7;
   line-height: 1.4;
 }
 
 .s-icon--primary-brd:focus, .s-icon--primary-brd:hover {
   color: #fff;
-  background: #f97979;
-  border-color: #f97979;
+  background: #337ab7;
+  border-color: #337ab7;
 }
 
 .s-icon--base-bg {
   color: #fff;
-  background: #f97979;
+  background: #337ab7;
   line-height: 1.6;
 }
 
@@ -163,7 +163,7 @@ a:focus, a:hover {
   Plan v1
 ------------------------------------*/
 .s-plan-v1__price-mark, .s-plan-v1__price-tag {
-  color: #f97979;
+  color: #337ab7;
 }
 
 /*----------------------------------
@@ -171,13 +171,13 @@ a:focus, a:hover {
 ------------------------------------*/
 /* Promo Block v2 */
 .s-promo-block-v2:before {
-  background-image: linear-gradient(145deg, rgba(152, 119, 234, 0.7) -25%, #f97979 100%);
+  background-image: linear-gradient(145deg, rgba(152, 119, 234, 0.7) -25%, #337ab7 100%);
   background-repeat: repeat-x;
 }
 
 /* Promo Block v3 */
 .s-promo-block-v3__divider:before {
-  background-image: linear-gradient(145deg, rgba(152, 119, 234, 0.9) -25%, #f97979 100%);
+  background-image: linear-gradient(145deg, rgba(152, 119, 234, 0.9) -25%, #337ab7 100%);
   background-repeat: repeat-x;
 }
 
@@ -193,18 +193,18 @@ a:focus, a:hover {
   Back To Top
 ------------------------------------*/
 .s-back-to-top {
-  background: #f97979;
+  background: #337ab7;
 }
 
 .s-back-to-top:hover:before {
-  color: #f97979;
+  color: #337ab7;
 }
 
 /*----------------------------------
   Cubeportfolio
 ------------------------------------*/
 .s-portfolio__filter-v1-item.cbp-filter-item-active {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 /* Image Effect
@@ -216,39 +216,39 @@ a:focus, a:hover {
 /* Arrows
 ------------------------------ */
 .s-portfolio__arrow-v1 .cbp-nav-prev, .s-portfolio__arrow-v1 .cbp-nav-next {
-  background: #f97979;
+  background: #337ab7;
 }
 
 .s-portfolio__arrow-v1 .cbp-nav-pagination-active {
-  background: #f97979;
+  background: #337ab7;
 }
 
 /* Tab v1
 ------------------------------ */
 .s-tab__filter-v1.cbp-filter-item-active {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 /*----------------------------------
   Swiper
 ------------------------------------*/
 .s-swiper__pagination-v1 .swiper-pagination-bullet-active {
-  background: #f97979;
+  background: #337ab7;
 }
 
 .s-swiper__pagination-v1--white .swiper-pagination-bullet-active {
-  background: #f97979;
+  background: #337ab7;
 }
 
 .s-swiper__pagination-v1--dark .swiper-pagination-bullet-active {
-  background: #f97979;
+  background: #337ab7;
 }
 
 /*----------------------------------
   Border
 ------------------------------------*/
 .g-hor-border-1__solid--primary {
-  border-color: #f97979;
+  border-color: #337ab7;
 }
 
 /*----------------------------------
@@ -262,17 +262,17 @@ a:focus, a:hover {
   Colors
 ------------------------------------*/
 .g-color--primary {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 .g-color--text[href]:hover {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 .g-color--white-opacity[href]:hover {
-  color: #f97979 !important;
+  color: #337ab7 !important;
 }
 
 .g-bg-color--primary {
-  background: #f97979 !important;
+  background: #337ab7 !important;
 }
