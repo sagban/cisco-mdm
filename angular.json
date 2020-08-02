@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cisco-mdm": {
+    "mdmAnatytica": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cisco-mdm",
+            "outputPath": "dist/mdmAnatytica",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -21,12 +21,27 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/public/img"
             ],
             "styles": [
-              "src/styles.css"
+              "src/public/vendor/bootstrap/css/bootstrap.min.css",
+              "src/public/css/animate.css",
+              "src/public/vendor/themify/themify.css",
+              "src/public/vendor/swiper/swiper.min.css",
+              "src/public/css/style.css",
+              "src/public/css/global/global.css",
+              "src/public/css/theme/red.css",
+              "src/styles.css",
             ],
-            "scripts": []
+            "scripts": [
+              "src/public/vendor/jquery.min.js",
+              "src/public/vendor/jquery.migrate.min.js",
+              "src/public/vendor/bootstrap/js/bootstrap.min.js",
+              "src/public/vendor/swiper/swiper.jquery.min.js",
+              "src/public/vendor/jquery.parallax.min.js",
+              "src/public/js/global.min.js",
+              "src/public/js/components/swiper.js",
+            ]
           },
           "configurations": {
             "production": {
@@ -62,18 +77,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cisco-mdm:build"
+            "browserTarget": "mdmAnatytica:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cisco-mdm:build:production"
+              "browserTarget": "mdmAnatytica:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cisco-mdm:build"
+            "browserTarget": "mdmAnatytica:build"
           }
         },
         "test": {
@@ -110,15 +125,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cisco-mdm:serve"
+            "devServerTarget": "mdmAnatytica:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cisco-mdm:serve:production"
+              "devServerTarget": "mdmAnatytica:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "cisco-mdm"
+    }
+  },
+  "defaultProject": "mdmAnatytica",
+  "cli": {
+    "analytics": false
+  }
 }
