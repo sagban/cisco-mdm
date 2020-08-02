@@ -3,3 +3,4 @@ macOS or Linux
 dlib>=19.3.0
 numpy
 Pillow
+Click>=6.0
