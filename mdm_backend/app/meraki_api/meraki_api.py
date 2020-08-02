@@ -1,5 +1,3 @@
-
-
 """https://api.meraki.com/api/v0/networks/N_711005791171205780/cameras/Q2JV-BY67-ABC8/snapshot'
 
 network : N_711005791171205780
@@ -9,25 +7,41 @@ import os
 import configparser
 import sys
 import json
-import requests
-from redisai import Client
-# import boto3
 import paho.mqtt.client as mqtt
 from PIL import Image
 import requests
 from io import BytesIO
 import datetime
-import pytz
 import logging
 import time
 
 session = requests.Session()
-
+global client
+USER_DATA = {
+      'API_KEY': "e4edb0ff642754d2b1f7146967edb38b34b3e49c",
+      'NET_ID': "N_711005791171205780",
+      'MV_SERIAL': "Q2JV-BY67-ABC8",
+      'SERVER_IP': "52.10.7.74"
+  }
 res_arr = []
 
-BASE_PATH = os.path.join(os.getcwd(), "credentials.ini")
 
-(API_KEY, NET_ID, MV_SERIAL, SERVER_IP) = gather_credentials(BASE_PATH)
+
+def gather_credentials(BASE_PATH):
+    """Gather Meraki credentials"""
+    conf_par = configparser.ConfigParser()
+    try:
+        conf_par.read(os.path.join(BASE_PATH, 'credentials.ini'))
+        # conf_par.read('credentials.ini')
+        cam_key = conf_par.get('meraki', 'key')
+        net_id = conf_par.get('meraki', 'network')
+        mv_serial = conf_par.get('sense', 'serial')
+        server_ip = conf_par.get('server', 'ip')
+    except:
+        print('Missing credentials or input file!')
+        sys.exit(2)
+    return cam_key, net_id, mv_serial, server_ip
+
 
 def iso(ts):
     # return time.strftime("%Y %d %b %H:%M:%S +0000", time.localtime(ts))
@@ -116,20 +130,7 @@ def get_meraki_snapshots(session, api_key, net_id, time=None):
         else:
             return None
 
-def gather_credentials(BASE_PATH):
-    """Gather Meraki credentials"""
-    conf_par = configparser.ConfigParser()
-    try:
-        conf_par.read(os.path.join(BASE_PATH, 'credentials.ini'))
-        # conf_par.read('credentials.ini')
-        cam_key = conf_par.get('meraki', 'key')
-        net_id = conf_par.get('meraki', 'network')
-        mv_serial = conf_par.get('sense', 'serial')
-        server_ip = conf_par.get('server', 'ip')
-    except:
-        print('Missing credentials or input file!')
-        sys.exit(2)
-    return cam_key, net_id, mv_serial, server_ip
+
 
 def print_urls(session, res_arr):#, API_KEY, NET_ID):
     url_arr = []
@@ -137,33 +138,30 @@ def print_urls(session, res_arr):#, API_KEY, NET_ID):
         s_url = get_meraki_snapshots(session, API_KEY, NET_ID, ts)
         url_arr.append(s_url)
 
-def disconnect(client):
+def disconnect():
     logging.debug("Disconnected")
     client.loop_stop()
 
 def connect_camera():
-    
-    USER_DATA = {
-        'API_KEY': API_KEY,
-        'NET_ID': NET_ID,
-        'MV_SERIAL': MV_SERIAL,
-        'SERVER_IP': SERVER_IP
-    }
-    # Start MQTT client
-    client = mqtt.Client()
-    client.user_data_set(USER_DATA)
-    #on connection to a MQTT broker:
-    client.on_connect = on_connect
-    #when an MQTT message is received:
-    client.on_message = on_message
-    #specify the MQTT broker here
-    client.connect(SERVER_IP, 1883, 300)
-    client.loop_start()
+  # BASE_PATH = "credentials.ini"
+  # (API_KEY, NET_ID, MV_SERIAL, SERVER_IP) = gather_credentials(BASE_PATH)
+  # Start MQTT client
+  client = mqtt.Client()
+  client.user_data_set(USER_DATA)
+  #on connection to a MQTT broker:
+  client.on_connect = on_connect
+  #when an MQTT message is received:
+  client.on_message = on_message
+  #specify the MQTT broker here
+  client.connect(USER_DATA['SERVER_IP'], 1883, 300)
+  client.loop_start()
+  return
 
 if __name__ == '__main__':
-    
+
     # (API_KEY, NET_ID, MV_SERIAL, SERVER_IP) = gather_credentials(BASE_PATH)
-    connect_camera()
+    (API_KEY, NET_ID, MV_SERIAL, SERVER_IP) = gather_credentials(BASE_PATH)
+    # connect_camera()
 
     print(res_arr)
 
