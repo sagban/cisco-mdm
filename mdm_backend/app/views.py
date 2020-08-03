@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from .meraki_api import meraki_api
 from .face_recognition import api, face_recognition
 from .models import *
-from .food_recognition import deepcnn_food_model as food_model
+# from .food_recognition import deepcnn_food_model as food_model
 # Create your views here.
 
 message = ["FAILURE", "SUCCESS", 'NOT_FOUND']
@@ -63,8 +63,9 @@ def disconnect_camera(request):
     dt.school = sch
     print(data)
     dt.attendance_pred = data[len(data) - 1]['person_count']
-    p = food_model.predict_on_image()
-    dt.food_pred =str(p[0]) + " " + str(p[1])
+    # p = food_model.predict_on_image()
+    # dt.food_pred =str(p[0]) + " " + str(p[1])
+    dt.food_pred = 'rice dal'
     dt.save()
     return HttpResponse(res(1, message[1], data))
   else:
@@ -84,16 +85,11 @@ def get_urls(request):
 @api_view(['GET'])
 def do_recognition(request):
     if request.method == 'GET':
-      img =  {}
-      known_names, known_face_encodings = face_recognition.scan_known_people(img, True)
-      args = {}
-      HttpResponse(res(0, message[0], args))
-      # ?? ret already returning dict ??
-      ret = face_recognition.test_image(face_recognition.images_to_check, known_names, known_face_encodings, tolerance, show_distance)
-      # ret = {}
+      ret = face_recognition.do_recognition()
       return HttpResponse(res(1, message[1], ret))
     else:
         return HttpResponse(res(0, message[0]))
+
 
 @csrf_exempt
 @api_view(['POST'])
