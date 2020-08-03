@@ -4,13 +4,14 @@
         <p class="g-font-size-12--xs g-color--dark" *ngIf="message">{{message}}</p>
         <div class="row">
           <div *ngFor="let report of reports" class="col-sm-8 g-margin-t-10--xs">
-            <app-report-card attendance_true="{{report?.true.attendance_true}}"
-            food_true="{{report?.true.food_pred}}"
-            attendance_pred="{{report.pred.attendance_pred}}"
-            food_pred="{{report.pred.food_pred}}"
-                             accuracy="{{report.acc}}"
-                             date="{{report.date}}"
-                             discrepancy="{{report.is_discrepancy}}"
+            <app-report-card
+              attendance_true="{{report?.attendance_true}}"
+            food_true="{{report?.food_pred}}"
+            attendance_pred="{{report.attendance_pred}}"
+            food_pred="{{report.food_pred}}"
+           accuracy="{{report.acc}}"
+           date="{{report.date}}"
+           discrepancy="{{report.is_discrepancy}}"
             ></app-report-card>
           </div>
         </div>

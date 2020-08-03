@@ -126,7 +126,15 @@ def get_reports(request):
     reports = json.loads(reports)
     print(reports)
     for report in reports:
-      args.append(report['fields'])
+      item = report['fields']
+      print(item)
+      pred = DailyPrediction.objects.filter(id= item['pred']).first()
+      true = DailyTrue.objects.filter(id=item['true']).first()
+      item['food_pred'] = pred.food_pred
+      item['food_true'] = true.food_true
+      item['attendance_pred'] = pred.attendance_pred
+      item['attendance_true'] = true.attendance_true
+      args.append(item)
 
     return HttpResponse(res(1, message[1], args))
   else:
