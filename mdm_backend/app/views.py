@@ -1,5 +1,5 @@
 import json
-
+from django.forms.models import model_to_dict
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 from .meraki_api import meraki_api
 from .face_recognition import api, face_recognition
 from .models import *
+from .food_recognition import deepcnn_food_model as food_model
 # Create your views here.
 
 message = ["FAILURE", "SUCCESS", 'NOT_FOUND']
@@ -22,7 +23,6 @@ def format_response(data):
 
 def res(status, message, data = None):
   # data = json.dumps(data)
-  print(data, "dumped")
   args = {
     "status": status,
     "message": message,
@@ -58,17 +58,14 @@ def connect_camera(request):
 def disconnect_camera(request):
   if request.method=="GET":
     data = meraki_api.disconnect()
-    # sch = School.objects.filter(email='sagarbansal099@gmail.com').first()
-    # dt = DailyPrediction()
-    # dt.school = sch
-    # print(data)
-    # dt.attendance_true = data[len(data) - 1]['person_count']
-    # dt.food_true = "Rice Dal"
-    # dt.save()
-    # report = Reports()
-    # report.school = sch
-    # report.pred = dt
-    # report.save()
+    sch = School.objects.filter(email='sagarbansal099@gmail.com').first()
+    dt = DailyPrediction()
+    dt.school = sch
+    print(data)
+    dt.attendance_pred = data[len(data) - 1]['person_count']
+    p = food_model.predict_on_image()
+    dt.food_pred =str(p[0]) + " " + str(p[1])
+    dt.save()
     return HttpResponse(res(1, message[1], data))
   else:
     return HttpResponse(res(0, message[0]))
@@ -110,6 +107,14 @@ def add_attendance(request):
     dt.attendance_true = data['attendance']
     dt.food_true = data['food']
     dt.save()
+    report = Reports()
+    report.school = sch
+    report.true = dt
+    dp = DailyPrediction.objects.filter(school=sch).first()
+    report.pred = dp
+    report.acc = "90%"
+    report.is_discrepancy = 1
+    report.save()
     return HttpResponse(res(1, message[1], dt.id))
   else:
     return HttpResponse(res(0, message[0]))
@@ -118,7 +123,15 @@ def add_attendance(request):
 @api_view(['GET'])
 def get_reports(request):
   if request.method=="GET":
-    data = meraki_api.get_urls()
-    return HttpResponse(res(1, message[1], data))
+    sch = School.objects.filter(email='sagarbansal099@gmail.com').first()
+    args = []
+    reports = Reports.objects.filter(school=sch)
+    reports = serializers.serialize('json', reports)
+    reports = json.loads(reports)
+    print(reports)
+    for report in reports:
+      args.append(report['fields'])
+
+    return HttpResponse(res(1, message[1], args))
   else:
     return HttpResponse(res(0, message[0]))
