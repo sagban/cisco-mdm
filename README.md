@@ -20,7 +20,7 @@ school.
 Student teams are expected to to explore the capabilities of Meraki camera’s inbuilt Machine learning (ML) modules
 and develop solutions to monitor the activities under the Mid-day Meal Scheme.
 
-### Modules :
+### Solution Modules 
 
 1. Meraki MV Sense :
 After connecting to the camera, MQTT broker subscribes to the topic on which the camera sends continuous video feed. The Meraki Raw Detection API is used for getting the person count. The timestamps for the URLs with the trigger person count greater than zero are stored. Using the Meraki Snapshot API, snapshot URL and its expiry are obtained. Thus, we get the number of students who got the meal. The URls are then sent for face recognition and food recognition respecively.
