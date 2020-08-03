@@ -9,4 +9,5 @@ urlpatterns = [
   path('get_urls/', views.get_urls, name='get_urls'),
   path('do_face_recognition/', views.do_recognition, name='do_recognition'),
   path('add_attendance/', views.add_attendance, name='add_attendance'),
+  path('get_reports/', views.get_reports, name='get_reports'),
 ]

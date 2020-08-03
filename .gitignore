@@ -50,6 +50,7 @@ Thumbs.db
 # Backend Ignores
 # Environments
 mdm_backend/venv
+mdm_backend/app/food_recognition/food-model-files/alexnet_food_model.h5
 
 
 

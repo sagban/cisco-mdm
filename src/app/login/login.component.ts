@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     // this.authenticationService._getSession.next(true);
     // // localStorage.setItem('verifiedUserName', JSON.stringify(res.data['username']));
     // // // this.authenticationService._getVerifiedUserName.next( res.data['username']);
-    // window.location.href = this.returnUrl;
+    window.location.href = this.returnUrl;
 
     this.formService.login(this.loginForm.value).pipe(first()).subscribe(res =>{
       console.log(res);

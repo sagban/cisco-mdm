@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from '../../_services/data.service';
 
 @Component({
   selector: 'app-reports',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor() { }
+  reports = [];
+  message = "No reports found";
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.dataService.get_reports().subscribe(res=>{
+      if(res.status == 1){
+        console.log(res.data);
+        this.reports = res.data;
+        this.message = "Reports Found"
+      }
+    })
   }
+
+
 
 }

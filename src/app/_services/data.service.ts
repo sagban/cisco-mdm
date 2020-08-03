@@ -40,4 +40,10 @@ export class DataService {
       withCredentials: true  // <=========== important!
     });
   }
+  get_reports(): any {
+    const url = this.base + '/get_reports';
+    return this.http.get(url, {
+      withCredentials: true  // <=========== important!
+    });
+  }
 }
