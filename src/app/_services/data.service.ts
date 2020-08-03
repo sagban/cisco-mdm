@@ -28,4 +28,16 @@ export class DataService {
       withCredentials: true  // <=========== important!
     });
   }
+  get_urls(): any {
+    const url = this.base + '/get_urls';
+    return this.http.get(url, {
+      withCredentials: true  // <=========== important!
+    });
+  }
+  add_attendence(data): any {
+    const url = this.base + '/add_attendance/';
+    return this.http.post(url, {data:{data},
+      withCredentials: true  // <=========== important!
+    });
+  }
 }

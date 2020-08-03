@@ -6,6 +6,8 @@ import {HomeComponent} from './home/home.component';
 import {CameraComponent} from './camera/camera.component';
 import {ReportsComponent} from './reports/reports.component';
 import {GrievanceComponent} from './grievance/grievance.component';
+import {SnapshotsComponent} from './snapshots/snapshots.component';
+import {AddComponent} from './add/add.component';
 
 const routes: Routes = [
   {
@@ -13,10 +15,12 @@ const routes: Routes = [
     component: DashboardSchoolComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: "", component: HomeComponent, canActivate: [AuthGuard]},
-      { path: "connect_camera", component: CameraComponent, canActivate: [AuthGuard]},
+      // { path: "", component: HomeComponent, canActivate: [AuthGuard]},
+      { path: "", component: CameraComponent, canActivate: [AuthGuard]},
+      { path: "snapshots", component: SnapshotsComponent, canActivate: [AuthGuard]},
       { path: "reports", component: ReportsComponent, canActivate: [AuthGuard]},
       { path: "grievance", component: GrievanceComponent, canActivate: [AuthGuard]},
+      { path: "add", component: AddComponent, canActivate: [AuthGuard]},
     ]
   },
 ];

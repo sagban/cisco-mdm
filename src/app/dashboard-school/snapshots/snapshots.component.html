@@ -1,0 +1,11 @@
+<div class="g-container--md">
+    <div class="g-margin-b-60--xs g-text-center--xs g-text-left--sm">
+        <h2 class="g-font-size-32--xs g-font-size-36--md g-letter-spacing--1 g-color--dark">Snapshots</h2>
+        <p class="g-padding-y-10--xs g-color--dark" *ngIf="message">{{message}}</p>
+        <div class="row g-full-width--xs">
+          <div *ngFor="let url of urls" class="col-md-4 g-margin-b-10--xs">
+            <img class="img-responsive" *ngIf="url !== null" src="{{url}}" alt="" width="400">
+          </div>
+        </div>
+    </div>
+</div>
