@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 from .meraki_api import meraki_api
+from .face_recognition import api, face_recognition
 
 # Create your views here.
 
@@ -58,3 +59,21 @@ def disconnect_camera(request):
     return HttpResponse(res(1, message[1]))
   else:
     return HttpResponse(res(0, message[0]))
+
+@csrf_exempt
+@api_view(['GET'])
+def do_recognition(request):
+    if request.method == 'GET':
+        known_names, known_face_encodings = face_recognition.scan_known_people(face_recognition.known_people_folder, isPresent)
+        if sys.version_info < (3, 4) and cpus != 1:
+            args = {
+                'warning': "WARNING: Python 3.4+ is needed for multi-processing. Doing on single CPU",
+                cpus: 1,
+        }
+        HttpResponse(res(0, message[0], args))
+        # ?? ret already returning dict ??
+        ret = face_recognition.test_image(face_recognition.images_to_check, known_names, known_face_encodings, tolerance, show_distance)
+        return HttpResponse(res(1, message[1], ret))
+    else:
+        return HttpResponse(res(0, message[0]))
+
