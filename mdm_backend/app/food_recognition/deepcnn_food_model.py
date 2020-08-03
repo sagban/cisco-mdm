@@ -50,13 +50,14 @@ import pandas as pd
 import numpy as np
 import os
 
+print("modules imported...")
 """# Initialization"""
 
-BASE_PATH = '/content/drive/My Drive/Food-Dataset/' #'/kaggle/input/' 
+BASE_PATH = os.path.join(os.getcwd(), 'food-model-files') #'/kaggle/input/' 
 # LABELS = ['rice', 'roti', 'dal', 'sabzi']
 LABELS = ['rice', 'roti', 'dal', 'sabzi']
  
-
+print("BASE_PATH {}".format(BASE_PATH))
 """# Building CNN Model"""
 
 def get_alexnet(input_shape, nb_classes): 
@@ -241,13 +242,14 @@ def cnn_extension_RF(alexnet, isPresent=True, train_images=None, test_images=Non
         features = np.load(os.path.join(BASE_PATH, 'features.npy'))       
         train_features=pd.DataFrame(data=features,columns=feature_col)
         feature_col = np.array(feature_col)
+        print("Training features read...")
 
     """## Random Forest Classifier"""
 
     rf = RandomForestClassifier(n_estimators = 12, random_state = 24, max_features=10)
 
     rf.fit(train_features, train_label_ids)
-
+    print("features fit into RF...")
     if isPresent == False:
         i=0
         features_test=np.zeros(shape=(len(test_images), 4096))
@@ -265,7 +267,7 @@ def cnn_extension_RF(alexnet, isPresent=True, train_images=None, test_images=Non
                 f.write(i+'\n') 
     # test_images[313].shape
     else:
-        features_test = np.load(os.path.join(BASE_PATH, 'features_test'))
+        features_test = np.load(os.path.join(BASE_PATH, 'features_test.npy'))
         test_labels = []
         with open(os.path.join(BASE_PATH, 'test_labels.txt'), 'r') as f:
             lines = f.readlines()
@@ -304,7 +306,8 @@ def get_classes(prediction):
 
 """## Predictions on Images"""
 def get_predictions(image):
-    alexnet = load_saved_model("path")
+    print("In get_predictions()...")
+    alexnet = load_saved_model(os.path.join(BASE_PATH, 'alexnet_food_model.h5'))
     # train_x, test_x, train_y, test_y = load_data()
     FC_layer_model, rf, feature_col = cnn_extension_RF(alexnet) #, isPresent=False, train_images=train_x, test_images=test_x, train_labels=train_y, test_labels=test_y)
     FC_output = FC_layer_model.predict(image)
@@ -319,9 +322,10 @@ def predict_on_image(img_path):
     # plt.imshow(img)
     img = np.expand_dims(img, axis=0)
     predictions = get_predictions(img)
-    print("It's ",get_classes(predictions[0]))
+    
     return get_classes(predictions[0])
 
 if __name__ == '__main__':
-    image_path = os.path.join(BASE_PATH, 'test_image_1.jpg')
-    results = predict_on_image(image_path)    
+    image_path = os.path.join(BASE_PATH, 'test_image_3.png')
+    results = predict_on_image(image_path) 
+    print("It's ", results)
