@@ -2,7 +2,7 @@ from __future__ import print_function
 import click
 import os
 import re
-from . import api as face_recognition
+import face_recognition.api as face_recognition
 import multiprocessing
 import itertools
 import sys
@@ -12,13 +12,14 @@ import json
 from json import JSONEncoder
 import cv2
 
-Encoding_dir = os.path.join(os.getcwd(),"app","face_recognition", "Faces/known_people")
+Encoding_dir = "../Faces/known_people"
 
 isPresent = True
-size = os.path.getsize(os.path.join(Encoding_dir, "enc1.json"))
-
-if size == 0:
-	isPresent=False
+known_people_folder=Encoding_dir
+isPresent=False
+cpus=1
+tolerance=0.55
+show_distance=False
 
 class NumpyArrayEncoder(JSONEncoder):
     def default(self, obj):
@@ -61,10 +62,10 @@ def scan_known_people(known_people_folder, isPresent):
             encodings = json.loads(enc.read())
         known_names = []
         known_face_encodings = []
-        for k, v in encodings.items():
+        for k, v in encodings.items():       
             known_names.append(k)
             known_face_encodings.append(np.asarray(v))
-        return known_names, known_face_encodings
+        return known_names, known_face_encodings    
 
 def print_result(filename, name, distance, show_distance=False):
     new_name = filename.rsplit('/',1)
@@ -75,12 +76,12 @@ def print_result(filename, name, distance, show_distance=False):
 
 
 def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.55, show_distance=False):
-    unknown_image = image_to_check#face_recognition.load_image_file(image_to_check)
+    unknown_image = face_recognition.load_image_file(image_to_check)
 
-    '''if max(unknown_image.shape) > 1600:
+    if max(unknown_image.shape) > 1600:
         pil_img = PIL.Image.fromarray(unknown_image)
         pil_img.thumbnail((1600, 1600), PIL.Image.LANCZOS)
-        unknown_image = np.array(pil_img)'''
+        unknown_image = np.array(pil_img)
 
     unknown_encodings = face_recognition.face_encodings(unknown_image)
     values = {}
@@ -106,7 +107,7 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.55
         ctr=ctr+1
         #list_of_people = list_of_people + " no person found"
         #print_result(image_to_check, "no_persons_found", None, show_distance)
-
+    
     return values
 
 def image_files_in_folder(folder):
@@ -135,14 +136,14 @@ def process_images_in_process_pool(images_to_check, known_names, known_face_enco
 
     pool.starmap(test_image, function_parameters)
 
-def do_recognition(images_to_check, known_people_folder=Encoding_dir, isPresent=False, cpus=1, tolerance=0.55, show_distance=False):
+def do_recognition(images_to_check):
     '''
     :param known_people_folder: (Required) Folder containing person's facial information. Either raw images, or precomputed encodings
     :param images_to_check: (Required) Path to image/directory of images to apply recognition alogrithm on.
     :param isPresent: (Optional) Boolean, tells if the encodings are already calculated and stored.
     :param cpus: (Optional) No of cpus to allocate. Enables multiprocessing for faster computations
     :param tolerance: (Optional) Threshold value
-    :param show_distance: (Optional) Boolean, if True, shows the distance (difference) between test image and image in the database
+    :param show_distance: (Optional) Boolean, if True, shows the distance (difference) between test image and image in the database   
     '''
     known_names, known_face_encodings = scan_known_people(known_people_folder, isPresent)
 
@@ -162,8 +163,8 @@ def main():
     #known_people_folder = os.path.join(BASE_DIR, known_people_folder)
     images_to_check = os.path.join(BASE_DIR, images_to_check)
     image = cv2.imread(images_to_check)
-    result = do_recognition(image, isPresent=isPresent)
-    print(result)
+    result = do_recognition(images_to_check) 
+    print(result)       
 
 
 if __name__ == "__main__":
