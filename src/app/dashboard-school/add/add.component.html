@@ -1,0 +1,32 @@
+<div class="g-container--md">
+    <div class="g-margin-b-60--xs g-text-center--xs g-text-left--sm">
+        <h2 class="g-font-size-32--xs g-font-size-36--md g-letter-spacing--1 g-color--dark">Add Daily Attendance</h2>
+        <p class="g-padding-y-10--xs g-color--dark" *ngIf="message">{{message}}</p>
+        <div class="row">
+          <form class="col-sm-8" [formGroup]="addForm" (ngSubmit)="onsubmit()">
+
+            <div class="g-margin-b-30--xs">
+              <input type="text" class="form-control s-form-v4__input" formControlName="attendance" placeholder="* Attendance" required>
+              <div *ngIf="f.attendance?.invalid && (f.attendance?.dirty || f.attendance?.touched)">
+                <div *ngIf="f.email.errors?.required" class="g-color--primary g-font-size-10--xs">
+                  Attendance is required.
+                </div>
+              </div>
+            </div>
+            <div class="g-margin-b-30--xs">
+              <input type="text" class="form-control s-form-v4__input" formControlName="food" placeholder="* Food Items" required>
+              <div *ngIf="f.food?.invalid && (f.food?.dirty || f.food?.touched)">
+                <div *ngIf="f.food.errors?.required" class="g-color--primary g-font-size-10--xs">
+                  Password is required.
+                </div>
+              </div>
+            </div>
+            <div class="g-text-center--xs">
+              <button type="submit" [disabled]="addForm.invalid" class="text-uppercase btn-block s-btn s-btn--md s-btn--primary-bg g-radius--50 g-padding-x-50--xs g-margin-b-20--xs">Add Attendance</button>
+              <p class="g-font-size-13--xs g-color--primary" *ngIf="message != ''">{{message}}</p>
+            </div>
+
+          </form>
+        </div>
+    </div>
+</div>

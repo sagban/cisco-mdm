@@ -7,6 +7,8 @@ import { GrievanceComponent } from './grievance/grievance.component';
 import { CameraComponent } from './camera/camera.component';
 import { ReportCardComponent } from './report-card/report-card.component';
 import { ReportsComponent } from './reports/reports.component';
+import { SnapshotsComponent } from './snapshots/snapshots.component';
+import { AddComponent } from './add/add.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { ReportsComponent } from './reports/reports.component';
   GrievanceComponent,
   CameraComponent,
   ReportCardComponent,
-  ReportsComponent
+  ReportsComponent,
+  SnapshotsComponent,
+  AddComponent
   ],
   imports: [
     CommonModule,

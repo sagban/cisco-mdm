@@ -1,13 +1,24 @@
 <div class="g-container--md">
-        <div class="g-margin-b-60--xs g-text-center--xs g-text-left--sm">
-            <h2 class="g-font-size-32--xs g-font-size-36--md g-letter-spacing--1 g-color--dark">Connect Camera</h2>
-            <div class="row">
-              <div class="col-sm-8">
-                <p>Camera Status: {{getStatus()}}</p>
-                <button *ngIf="getStatus() == true" (click)="connect()" class="text-uppercase s-btn s-btn--xs s-btn--primary-bg g-radius--50 g-padding-x-50--xs g-margin-r-10--xs">Disconnect Camera</button>
-                <button *ngIf="getStatus() == false" (click)="connect()" class="text-uppercase s-btn s-btn--xs s-btn--primary-bg g-radius--50 g-padding-x-50--xs g-margin-r-10--xs">Connect Camera</button>
-              </div>
+    <div class="g-margin-b-60--xs g-text-center--xs g-text-left--sm">
+        <h2 class="g-font-size-32--xs g-font-size-36--md g-letter-spacing--1 g-color--dark">Connect Camera</h2>
+        <div class="row">
+          <div class="col-sm-8">
+            <p>Camera Status: {{getStatus()}} | {{message}}</p>
+            <button *ngIf="getStatus() == true" (click)="disconnect()" class="text-uppercase s-btn s-btn--xs s-btn--primary-bg g-radius--50 g-padding-x-50--xs g-margin-r-10--xs">Disconnect Camera</button>
+            <button *ngIf="getStatus() == false" (click)="connect()" class="text-uppercase s-btn s-btn--xs s-btn--primary-bg g-radius--50 g-padding-x-50--xs g-margin-r-10--xs">Connect Camera</button>
+          </div>
 
-            </div>
         </div>
     </div>
+</div>
+<div *ngIf="show !== -1" class="g-container--md">
+    <div class="g-margin-b-60--xs g-text-center--xs g-text-left--sm">
+        <h2 class="g-font-size-32--xs g-font-size-36--md g-letter-spacing--1 g-color--dark">Meraki Results</h2>
+        <div class="row">
+          <p class="col-sm-8 g-color--primary g-font-size-20--xs">Total Person Count: {{person_count}}</p>
+          <!--<div *ngFor="let d of data" class="col-sm-8">-->
+            <!--{{d?.person_count}}-->
+          <!--</div>-->
+        </div>
+    </div>
+</div>

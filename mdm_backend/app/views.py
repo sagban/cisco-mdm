@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 
 from .meraki_api import meraki_api
 from .face_recognition import api, face_recognition
-
+from .models import *
 # Create your views here.
 
 message = ["FAILURE", "SUCCESS", 'NOT_FOUND']
@@ -21,6 +21,8 @@ def format_response(data):
   )
 
 def res(status, message, data = None):
+  # data = json.dumps(data)
+  print(data, "dumped")
   args = {
     "status": status,
     "message": message,
@@ -55,25 +57,68 @@ def connect_camera(request):
 @api_view(['GET'])
 def disconnect_camera(request):
   if request.method=="GET":
-    meraki_api.disconnect()
-    return HttpResponse(res(1, message[1]))
+    data = meraki_api.disconnect()
+    # sch = School.objects.filter(email='sagarbansal099@gmail.com').first()
+    # dt = DailyPrediction()
+    # dt.school = sch
+    # print(data)
+    # dt.attendance_true = data[len(data) - 1]['person_count']
+    # dt.food_true = "Rice Dal"
+    # dt.save()
+    # report = Reports()
+    # report.school = sch
+    # report.pred = dt
+    # report.save()
+    return HttpResponse(res(1, message[1], data))
   else:
     return HttpResponse(res(0, message[0]))
 
 @csrf_exempt
 @api_view(['GET'])
+def get_urls(request):
+  if request.method=="GET":
+    data = meraki_api.get_urls()
+    return HttpResponse(res(1, message[1], data))
+  else:
+    return HttpResponse(res(0, message[0]))
+
+
+@csrf_exempt
+@api_view(['GET'])
 def do_recognition(request):
     if request.method == 'GET':
-        known_names, known_face_encodings = face_recognition.scan_known_people(face_recognition.known_people_folder, isPresent)
-        if sys.version_info < (3, 4) and cpus != 1:
-            args = {
-                'warning': "WARNING: Python 3.4+ is needed for multi-processing. Doing on single CPU",
-                cpus: 1,
-        }
-        HttpResponse(res(0, message[0], args))
-        # ?? ret already returning dict ??
-        ret = face_recognition.test_image(face_recognition.images_to_check, known_names, known_face_encodings, tolerance, show_distance)
-        return HttpResponse(res(1, message[1], ret))
+      img =  {}
+      known_names, known_face_encodings = face_recognition.scan_known_people(img, True)
+      args = {}
+      HttpResponse(res(0, message[0], args))
+      # ?? ret already returning dict ??
+      ret = face_recognition.test_image(face_recognition.images_to_check, known_names, known_face_encodings, tolerance, show_distance)
+      # ret = {}
+      return HttpResponse(res(1, message[1], ret))
     else:
         return HttpResponse(res(0, message[0]))
 
+@csrf_exempt
+@api_view(['POST'])
+def add_attendance(request):
+  if request.method == 'POST':
+    data = request.data['data']['data']
+    print(data)
+    sch = School.objects.filter(email= 'sagarbansal099@gmail.com').first()
+    dt = DailyTrue()
+    dt.school = sch
+    dt.attendance_true = data['attendance']
+    dt.food_true = data['food']
+    dt.save()
+    return HttpResponse(res(1, message[1], dt.id))
+  else:
+    return HttpResponse(res(0, message[0]))
+
+@csrf_exempt
+@api_view(['GET'])
+def get_reports(request):
+  if request.method=="GET":
+    data = meraki_api.get_urls()
+    return HttpResponse(res(1, message[1], data))
+  else:
+    return HttpResponse(res(0, message[0]))

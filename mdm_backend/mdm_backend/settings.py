@@ -77,8 +77,16 @@ WSGI_APPLICATION = 'mdm_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+       'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mdm_storage',
+        'USER' : "root",
+        'PASSWORD' : 'VNIT@123',
+        'HOST' : 'localhost',
+        'PORT' : '3306',
+        'OPTIONS' : {
+            'charset' : 'utf8mb4',
+            'init_command' : 'set collation_connection=utf8mb4_unicode_ci',
+        },
     }
 }
 
