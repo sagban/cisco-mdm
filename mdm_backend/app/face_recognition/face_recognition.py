@@ -2,7 +2,7 @@ from __future__ import print_function
 import click
 import os
 import re
-import face_recognition.api as face_recognition
+from . import api as face_recognition
 import multiprocessing
 import itertools
 import sys
@@ -12,7 +12,7 @@ import json
 from json import JSONEncoder
 import cv2
 
-Encoding_dir = "../Faces/known_people"
+Encoding_dir = '../'
 
 isPresent = True
 known_people_folder=Encoding_dir
@@ -62,10 +62,10 @@ def scan_known_people(known_people_folder, isPresent):
             encodings = json.loads(enc.read())
         known_names = []
         known_face_encodings = []
-        for k, v in encodings.items():       
+        for k, v in encodings.items():
             known_names.append(k)
             known_face_encodings.append(np.asarray(v))
-        return known_names, known_face_encodings    
+        return known_names, known_face_encodings
 
 def print_result(filename, name, distance, show_distance=False):
     new_name = filename.rsplit('/',1)
@@ -107,7 +107,7 @@ def test_image(image_to_check, known_names, known_face_encodings, tolerance=0.55
         ctr=ctr+1
         #list_of_people = list_of_people + " no person found"
         #print_result(image_to_check, "no_persons_found", None, show_distance)
-    
+
     return values
 
 def image_files_in_folder(folder):
@@ -136,35 +136,31 @@ def process_images_in_process_pool(images_to_check, known_names, known_face_enco
 
     pool.starmap(test_image, function_parameters)
 
-def do_recognition(images_to_check):
+def do_recognition():
     '''
     :param known_people_folder: (Required) Folder containing person's facial information. Either raw images, or precomputed encodings
     :param images_to_check: (Required) Path to image/directory of images to apply recognition alogrithm on.
     :param isPresent: (Optional) Boolean, tells if the encodings are already calculated and stored.
     :param cpus: (Optional) No of cpus to allocate. Enables multiprocessing for faster computations
     :param tolerance: (Optional) Threshold value
-    :param show_distance: (Optional) Boolean, if True, shows the distance (difference) between test image and image in the database   
+    :param show_distance: (Optional) Boolean, if True, shows the distance (difference) between test image and image in the database
     '''
-    known_names, known_face_encodings = scan_known_people(known_people_folder, isPresent)
-
-    if sys.version_info < (3, 4) and cpus != 1:
-        print("WARNING: Python 3.4+ is needed for multi-processing. Doing on single CPU")
-        cpus = 1
-
+    images_to_check = "/Users/sagban/cisco-mdm/mdm_backend/app/face_recognition/Faces/faces_to_test/img1.jpg"
+    known_names, known_face_encodings = scan_known_people(known_people_folder, False)
     ret = test_image(images_to_check, known_names, known_face_encodings, tolerance, show_distance)
     return ret
 
 
 def main():
-    BASE_DIR = os.path.join(os.getcwd(), "..", "Faces")
+    BASE_DIR = os.path.join(".", "Faces")
     #known_people_folder = input("Enter the folder where known faces/encodings are present: ")
     images_to_check = input("Enter the image on which recognition is to be applied: ")
 
     #known_people_folder = os.path.join(BASE_DIR, known_people_folder)
     images_to_check = os.path.join(BASE_DIR, images_to_check)
     image = cv2.imread(images_to_check)
-    result = do_recognition(images_to_check) 
-    print(result)       
+    result = do_recognition(images_to_check)
+    print(result)
 
 
 if __name__ == "__main__":

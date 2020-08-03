@@ -8,6 +8,7 @@ import {ReportsComponent} from './reports/reports.component';
 import {GrievanceComponent} from './grievance/grievance.component';
 import {SnapshotsComponent} from './snapshots/snapshots.component';
 import {AddComponent} from './add/add.component';
+import {FaceComponent} from './face/face.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: "reports", component: ReportsComponent, canActivate: [AuthGuard]},
       { path: "grievance", component: GrievanceComponent, canActivate: [AuthGuard]},
       { path: "add", component: AddComponent, canActivate: [AuthGuard]},
+      { path: "face", component: FaceComponent, canActivate: [AuthGuard]},
     ]
   },
 ];

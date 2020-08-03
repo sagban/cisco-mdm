@@ -46,4 +46,10 @@ export class DataService {
       withCredentials: true  // <=========== important!
     });
   }
+  do_face_recognition(): any {
+    const url = this.base + '/do_face_recognition';
+    return this.http.get(url, {
+      withCredentials: true  // <=========== important!
+    });
+  }
 }

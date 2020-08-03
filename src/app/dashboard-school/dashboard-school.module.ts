@@ -9,6 +9,7 @@ import { ReportCardComponent } from './report-card/report-card.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SnapshotsComponent } from './snapshots/snapshots.component';
 import { AddComponent } from './add/add.component';
+import { FaceComponent } from './face/face.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AddComponent } from './add/add.component';
   ReportCardComponent,
   ReportsComponent,
   SnapshotsComponent,
-  AddComponent
+  AddComponent,
+  FaceComponent
   ],
   imports: [
     CommonModule,

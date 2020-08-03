@@ -85,16 +85,11 @@ def get_urls(request):
 @api_view(['GET'])
 def do_recognition(request):
     if request.method == 'GET':
-      img =  {}
-      known_names, known_face_encodings = face_recognition.scan_known_people(img, True)
-      args = {}
-      HttpResponse(res(0, message[0], args))
-      # ?? ret already returning dict ??
-      ret = face_recognition.test_image(face_recognition.images_to_check, known_names, known_face_encodings, tolerance, show_distance)
-      # ret = {}
+      ret = face_recognition.do_recognition()
       return HttpResponse(res(1, message[1], ret))
     else:
         return HttpResponse(res(0, message[0]))
+
 
 @csrf_exempt
 @api_view(['POST'])
